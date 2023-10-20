@@ -9,7 +9,7 @@ import Image from 'next/image';
 
 const navigation = [
   { name: 'Dashboard', href: '/' },
-  { name: 'Playground', href: '/playground' }
+  { name: 'Syllabus', href: '/syllabus' }
 ];
 
 function classNames(...classes: string[]) {
@@ -17,6 +17,7 @@ function classNames(...classes: string[]) {
 }
 
 export default function Navbar({ user }: { user: any }) {
+
   const pathname = usePathname();
 
   return (

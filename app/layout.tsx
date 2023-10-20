@@ -3,12 +3,13 @@ import './globals.css';
 import { Analytics } from '@vercel/analytics/react';
 import Nav from './nav';
 import Toast from './toast';
+import Footer from './footer';
 import { Suspense } from 'react';
 
 export const metadata = {
-  title: 'Next.js 13 + PlanetScale + NextAuth + Tailwind CSS',
+  title: 'Untitled Learning',
   description:
-    'A user admin dashboard configured with Next.js, PlanetScale, NextAuth, Tailwind CSS, TypeScript, ESLint, and Prettier.'
+    'A learning platform to learn anything for free.'
 };
 
 export default async function RootLayout({
@@ -23,8 +24,8 @@ export default async function RootLayout({
           <Nav />
         </Suspense>
         {children}
-        <Analytics />
-        {/* <Toast /> */}
+        {/* <Analytics /> */}
+        <Footer />
       </body>
     </html>
   );

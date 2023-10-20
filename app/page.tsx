@@ -1,78 +1,60 @@
 "use client"
 
-import React from 'react'
-import { Card, Title, Text, Grid, Flex, Metric, BarList, Button } from '@tremor/react';
-import { queryBuilder } from '../lib/planetscale';
-import dynamic from 'next/dynamic';
+import React, {useState, useEffect} from 'react'
+import { Card, Title, Text, Grid, Flex, Metric } from '@tremor/react';
 import Link from 'next/link';
-import getAllCourses from "../fauna/getLessons";
+import getAllUserCourses from "../fauna/getAllUserCourses";
+import EmptyState from "./elements/EmptyState"
 
 function CoursePlaceholder() {
-  const [courses, setCourses] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
-  const [hasWindow, setHasWindow] = React.useState(false);
-  React.useEffect(() => {
-    if (typeof window !== "undefined") {
-      setHasWindow(true);
-    }
-  }, []);
+  const [courses, setCourses] = useState([] as any);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const coursesPerPage = 6; // Number of courses per page
 
-  React.useEffect(() => {
+  useEffect(() => {
     async function fetchData() {
       setLoading(true);
-      const courses = await getAllCourses(); // NOTE :: this will be changed to user courses
-      const reformedCollection = courses.map((course:any) => {
+      const allCourses = await getAllUserCourses('fyjdjkdsfgjflukvgdfjgk');
+
+      if (allCourses.length > 0) {
+        const reformedCollection = allCourses.map((course: any) => {
           return { ...course.data, id: course.ref.id };
-      });
-      setCourses(reformedCollection);
+        });
+        setCourses(reformedCollection);
+      } else {
+        setCourses([]);
+      }
       setLoading(false);
     }
     fetchData();
   }, []);
 
+  const indexOfLastCourse = currentPage * coursesPerPage;
+  const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
+  const currentCourses = courses.slice(indexOfFirstCourse, indexOfLastCourse);
+
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
 const data = [
   {
-    title: 'My Courses',
-    category: 'My Courses',
-    stat: '10,234',
+    title: 'Syllabus',
+    description: 'See all syllabus available for you',
+    status: 'enabled',
+    link: '/syllabus'
   },
   {
-    category: 'My Wishlist',
-    stat: '12,543',
+    title: 'Premium Courses',
+    description: 'Coming soon',
+    status: 'disabled',
+    link: '/'
 
-  },
-  {
-    category: 'Categories',
-    stat: '2,543',
   }
 ];
 
-// const courses = [
-//   {
-//     id: 'fdjhvsdjvkdsjvhgs',
-//     title: 'Learn Philosophy Today',
-//     category: 'Philosophy',
-//     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, recusandae explicabo. Velit molestiae repellendus laborum eveniet distinctio. Minima dolorum rem placeat odit fuga, tenetur at nesciunt quo reiciendis, soluta ab.',
-//     url: 'https://www.youtube.com/watch?v=vo4pMVb0R6M&list=PLGMVCsud2sqX1F5BkUp7yiIFcGtFjb1hZ',
-
-//   },
-//   {
-//     id: 'fdjhvsdjvkdsjvsss',
-//     title: 'Learn Mathematics Today',
-//     category: 'Mathematics',
-//     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, recusandae explicabo. Velit molestiae repellendus laborum eveniet distinctio. Minima dolorum rem placeat odit fuga, tenetur at nesciunt quo reiciendis, soluta ab.',
-//     url: 'https://www.youtube.com/watch?v=JbhBdOfMEPs&list=PLybg94GvOJ9FoGQeUMFZ4SWZsr30jlUYK',
-
-//   },
-//   {
-//     id: 'fdjhvsdjvkdsdjbkhgs',
-//     title: 'Learn Chemistry Today',
-//     category: 'Chemistry',
-//     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, recusandae explicabo. Velit molestiae repellendus laborum eveniet distinctio. Minima dolorum rem placeat odit fuga, tenetur at nesciunt quo reiciendis, soluta ab.',
-//     url: 'https://www.youtube.com/watch?v=-KfG8kH-r3Y&list=PL0o_zxa4K1BWziAvOKdqsMFSB_MyyLAqS',
-//   }
-// ];
-
+console.log('loading', loading)
 
   return (
       <main className="p-4 md:p-10 mx-auto max-w-7xl">
@@ -82,45 +64,80 @@ const data = [
         Welcome back Godfred
       </Text>
       </div>
-      <Grid numItemsSm={2} numItemsLg={3} className="gap-6">
+      <Grid numItemsSm={2} numItemsLg={2} className="gap-6">
         {data.map((item) => (
-          <Card key={item.category}>
-            <Title>{item.category}</Title>
+          <Card key={item.title}>
+            <Title>{item.description}</Title>
             <Flex
               justifyContent="start"
               alignItems="baseline"
               className="space-x-2"
             >
-              <Metric>{item.stat}</Metric>
-              {/* <Text>Total views</Text> */}
             </Flex>
             <Flex className="mt-6">
-              <Text>Pages</Text>
-              <Text className="text-right">Views</Text>
+              <Text>{item.title}</Text>
+              <Link
+                className="bg-green-500 text-size-10 text-sm text-white px-2 py-1 rounded mr-1 text-right"
+                href={{
+                  pathname: item.link,
+                }}
+                >Visit</Link>
             </Flex>
           </Card>
         ))}
       </Grid>
 
-      <Grid numItemsSm={2} numItemsLg={3} style={{marginTop: 20}} className="gap-6">
-        {courses.map((item) => (
-          <Card key={item.id}>
-            <Title>{item.title}</Title><br/>
-            <Text>{item?.description}</Text>
-            {/* {hasWindow && <ReactPlayer controls={false} width={'100%'} height={200} url={item.url} />} */}
-            <Flex className="mt-6">
-              <Text>{item?.category}</Text>
-              <Link
-                      className="bg-blue-500 text-white px-2 py-1 rounded mr-1"
-                      href={{
-                        pathname: 'course-details',
-                        query: { id: item.id },
-                      }}
-                    >View Course</Link>
-            </Flex>
-          </Card>
-        ))}
+      <div  style={{marginBottom: 20, marginTop: 20}}>
+          <Title>My Courses</Title>
+      <Text>
+        List of your current courses
+      </Text>
+      </div>
+
+      {!loading && currentCourses.length === 0 ? (
+        <EmptyState />
+      ) : (
+          <Grid numItemsSm={2} numItemsLg={3} style={{ marginTop: 20 }} className="gap-3">
+          {currentCourses.map((item: any) => (
+            <Card key={item.id}>
+              <Title>{item.title}</Title>
+              <br />
+              <Text>{item?.description}</Text>
+              <Flex className="mt-6">
+                <Text style={{ textTransform: 'capitalize', width: 20 }}>
+                  {item?.category as string}
+                </Text>
+                <Link
+                  className="bg-blue-500 text-size-10 text-sm text-white px-2 py-1 rounded mr-1"
+                  href={{
+                    pathname: 'course-details',
+                  }}
+                  onClick={() => {
+                    localStorage.setItem('courseData', JSON.stringify(item));
+                  }}
+                >
+                  View
+                </Link>
+              </Flex>
+            </Card>
+          ))}
+        
       </Grid>
+      )}
+
+      <div className="mt-4 flex justify-center">
+        {Array.from({ length: Math.ceil(courses.length / coursesPerPage) }, (_, i) => (
+          <button
+            key={i}
+            onClick={() => paginate(i + 1)}
+            className={`bg-blue-500 text-white px-4 py-2 rounded mx-1 ${
+              i + 1 === currentPage ? 'bg-blue-700' : ''
+            }`}
+          >
+            {i + 1}
+          </button>
+        ))}
+      </div>
     </main>
   );
 }
