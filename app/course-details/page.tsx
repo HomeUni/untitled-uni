@@ -42,7 +42,7 @@ return (
     {courseData && (
         <div>
           <h2>Watch Course</h2>
-          {hasWindow && <ReactPlayer controls={false} width={'100%'} height={500} url={courseData.url} />}
+          {hasWindow && <ReactPlayer controls={true} width={'100%'} height={500} url={courseData.url} />}
         
           <p>Title: {courseData.title}</p>
           <p>Description: {courseData.description}</p>

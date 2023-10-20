@@ -8,7 +8,7 @@ import EmptyState from "./elements/EmptyState"
 
 function CoursePlaceholder() {
   const [courses, setCourses] = useState([] as any);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const coursesPerPage = 6; // Number of courses per page
 
