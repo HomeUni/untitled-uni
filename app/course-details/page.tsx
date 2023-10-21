@@ -36,7 +36,7 @@ return (
     <Link 
         className="bg-blue-500 font-200 text-white px-2 py-1 rounded mr-1"
         href={{pathname: '/'}}>{'<- '}back</Link>
-        <Title>Dashboard/Courses/{courseData.title}</Title>
+        <small>Dashboard/Courses/{courseData.title}</small>
     </div>
     <Card className="mt-8">
     {courseData && (
