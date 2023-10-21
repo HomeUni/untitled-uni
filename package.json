@@ -8,6 +8,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.2.1",
+    "@auth0/nextjs-auth0": "^3.2.0",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
     "@planetscale/database": "^1.11.0",

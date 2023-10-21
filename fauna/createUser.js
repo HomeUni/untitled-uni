@@ -12,12 +12,12 @@ const createUser = async (user) => {
         ))
         .then((ret) => { return 'UserExists' })
         .catch((err) => {
-            const createUser = client.query(
+            const createCollection = client.query(
                 q.Create(q.Collection('users'), { data: user })
             )
-            return createUser
+            return createCollection
         })
-    
+
     return createUserQuery
 
 

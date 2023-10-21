@@ -5,6 +5,7 @@ import Nav from './nav';
 import Toast from './toast';
 import Footer from './footer';
 import { Suspense } from 'react';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 export const metadata = {
   title: 'Untitled Learning',
@@ -19,14 +20,15 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full bg-gray-50">
+      <UserProvider>
       <body className="h-full">
         <Suspense>
           <Nav />
         </Suspense>
         {children}
-        {/* <Analytics /> */}
         <Footer />
       </body>
+      </UserProvider>
     </html>
   );
 }
