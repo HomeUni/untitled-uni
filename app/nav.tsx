@@ -6,10 +6,8 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 import getUser from '../fauna/getUser';
 import createUser from '../fauna/createUser';
 
-
 export default async function Nav() {
   const { user, error, isLoading } = useUser();
-
   // if (isLoading) return <div>Loading...</div>;
   // if (error) return <div>{error.message}</div>;
   React.useEffect(() => {
@@ -22,7 +20,6 @@ export default async function Nav() {
           console.log('addUser', addUser)
           localStorage.setItem('user', JSON.stringify(addUser.data))
         }
-        
     }
     fetchData();
 }, [user])
