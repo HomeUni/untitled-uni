@@ -16,9 +16,12 @@ interface Course {
     category: string | string[]; 
   }
 
+
 function CoursePlaceholder() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
+  const [user, setUser] = useState<any>({});
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>(''); 
@@ -27,6 +30,11 @@ function CoursePlaceholder() {
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
+      if (typeof window !== 'undefined') {
+        const user =  JSON.parse(localStorage.getItem('user' || {}) as any);
+        if(user?.sid){setUserLoggedIn(true);}
+        setUser(user);
+      }
       const allCourses = await getAllCourses();
       const reformedCollection = allCourses.map((course: any) => {
         return { ...course.data, id: course.ref.id } as Course;
@@ -73,7 +81,7 @@ function CoursePlaceholder() {
         description: course.description,
         category: course.category,
         url: course.url,
-        userId: 'fyjdjkdsfgjflukvgdfjgk'
+        userId: user?.sid,
       };
   
       const response = await createUserCourse(newCollection) as any;
@@ -92,6 +100,8 @@ function CoursePlaceholder() {
       toast.error("An error occurred while adding the course");
     }
   };
+
+  const isLoggedIn = () => !!userLoggedIn;
 
   return (
 
@@ -147,14 +157,27 @@ function CoursePlaceholder() {
                                   View
                               </Link>
 
-                              <button
+                              {isLoggedIn() ? (
+                                <button
                                   className="bg-black text-size-10 text-sm text-white px-2 py-1 rounded mr-1"
                                   onClick={() => {
-                                    handleSubmit(item)
-                                  } }
-                              >
+                                    handleSubmit(item);
+                                  }}
+                                >
                                   + my course
-                              </button>
+                                </button>
+                              ) : (
+                                <><br/>
+                                  <small>Please sign in to add the course to your collection.</small><br/>
+                                  <a
+                                    className="bg-black text-size-10 text-sm text-white px-2 py-1 rounded mr-1"
+                                    href='/api/auth/login'
+                                  >
+                                    Sign In
+                                  </a>
+                                </>
+                              )}
+
                           </div>
 
                       </div>

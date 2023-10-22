@@ -10,12 +10,21 @@ function CoursePlaceholder() {
   const [courses, setCourses] = useState([] as any);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [user, setUser] = useState({}) as any;
   const coursesPerPage = 6; // Number of courses per page
 
   useEffect(() => {
+    setLoading(true);
     async function fetchData() {
-      setLoading(true);
-      const allCourses = await getAllUserCourses('fyjdjkdsfgjflukvgdfjgk');
+      if (typeof window !== 'undefined') {
+
+        const user =  JSON.parse(localStorage.getItem('user' || {}) as any);
+
+        setUser(user);
+
+      const allCourses = await getAllUserCourses(user?.sid);
+
+      console.log('courses', allCourses)
 
       if (allCourses.length > 0) {
         const reformedCollection = allCourses.map((course: any) => {
@@ -25,6 +34,7 @@ function CoursePlaceholder() {
       } else {
         setCourses([]);
       }
+    }
       setLoading(false);
     }
     fetchData();
@@ -54,13 +64,16 @@ const data = [
   }
 ];
 
+console.log('user', user)
+console.log('currentCourses', currentCourses)
+
 
   return (
       <main className="p-4 md:p-10 mx-auto max-w-7xl">
         <div  style={{marginBottom: 20}}>
           <Title>Dashboard</Title>
       <Text>
-        Welcome back Godfred
+        Hello, {user?.name ?? 'Guest'}
       </Text>
       </div>
       <Grid numItemsSm={2} numItemsLg={2} className="gap-6">

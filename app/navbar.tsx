@@ -20,6 +20,11 @@ export default function Navbar({ user }: { user: any }) {
 
   const pathname = usePathname();
 
+  const handleLogout = ()=>{
+    window.location = '/api/auth/logout' as any;
+    localStorage.removeItem('user');
+  }
+
   return (
     <Disclosure as="nav" className="bg-white shadow-sm">
       {({ open }) => (
@@ -75,11 +80,19 @@ export default function Navbar({ user }: { user: any }) {
                       <span className="sr-only">Open user menu</span>
                       <Image
                         className="h-8 w-8 rounded-full"
-                        src={user?.image || 'https://avatar.vercel.sh/leerob'}
+                        src={user?.picture || 'https://avatar.vercel.sh/leerob'}
                         height={32}
                         width={32}
                         alt={`${user?.name || 'placeholder'} avatar`}
                       />
+                      <div className="ml-3">
+                      <div className="text-base font-medium text-gray-800">
+                        {user?.name}
+                      </div>
+                      <div className="text-sm font-medium text-gray-500">
+                        {user?.email}
+                      </div>
+                    </div>
                     </Menu.Button>
                   </div>
                   <Transition
@@ -95,15 +108,15 @@ export default function Navbar({ user }: { user: any }) {
                       {user ? (
                         <Menu.Item>
                           {({ active }) => (
-                            <a
+                            <button
                               className={classNames(
                                 active ? 'bg-gray-100' : '',
                                 'flex w-full px-4 py-2 text-sm text-gray-700'
                               )}
-                              href="/api/auth/logout"
+                              onClick={handleLogout}
                             >
                               Sign out
-                            </a>
+                            </button>
                           )}
                         </Menu.Item>
                       ) : (
@@ -180,12 +193,12 @@ export default function Navbar({ user }: { user: any }) {
                     </div>
                   </div>
                   <div className="mt-3 space-y-1">
-                    <a
-                    href="/api/auth/logout"
+                    <button
+                      onClick={handleLogout}
                       className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
                     >
                       Sign out
-                    </a>
+                    </button>
                   </div>
                 </>
               ) : (

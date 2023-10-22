@@ -17,7 +17,6 @@ export default async function Nav() {
         localStorage.setItem('user', JSON.stringify(myUser))
         if(!myUser){
           const addUser = await createUser(user) as any;
-          console.log('addUser', addUser)
           localStorage.setItem('user', JSON.stringify(addUser.data))
         }
     }
