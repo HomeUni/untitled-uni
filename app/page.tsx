@@ -5,13 +5,33 @@ import { Card, Title, Text, Grid, Flex, Metric } from '@tremor/react';
 import Link from 'next/link';
 import getAllUserCourses from "../fauna/getAllUserCourses";
 import EmptyState from "./elements/EmptyState"
+import { useUser } from '@auth0/nextjs-auth0/client';
+import getUser from '../fauna/getUser';
+import createUser from '../fauna/createUser';
+import Loading from './loading';
 
 function CoursePlaceholder() {
   const [courses, setCourses] = useState([] as any);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [user, setUser] = useState({}) as any;
+
   const coursesPerPage = 6; // Number of courses per page
+
+  const { user, error, isLoading } = useUser();
+  // if (isLoading) return <div>Loading...</div>;
+  // if (error) return <div>{error.message}</div>;
+  React.useEffect(() => {
+    async function fetchData() {
+        if (!user) return;
+        const myUser = await getUser(user?.email);
+        localStorage.setItem('user', JSON.stringify(myUser))
+        if(!myUser){
+          const addUser = await createUser(user) as any;
+          localStorage.setItem('user', JSON.stringify(addUser.data))
+        }
+    }
+    fetchData();
+}, [user])
 
   useEffect(() => {
     setLoading(true);
@@ -20,11 +40,7 @@ function CoursePlaceholder() {
 
         const user =  JSON.parse(localStorage.getItem('user' || {}) as any);
 
-        setUser(user);
-
       const allCourses = await getAllUserCourses(user?.sid);
-
-      console.log('courses', allCourses)
 
       if (allCourses.length > 0) {
         const reformedCollection = allCourses.map((course: any) => {
@@ -63,6 +79,12 @@ const data = [
 
   }
 ];
+
+if(loading){
+  return (
+    <Loading/>
+  )
+}
 
 console.log('user', user)
 console.log('currentCourses', currentCourses)
