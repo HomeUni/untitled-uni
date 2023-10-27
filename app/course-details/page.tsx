@@ -5,6 +5,8 @@ import Link from 'next/link';
 import React from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+import SocialShare from '../elements/SocialShare';
+
 
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 
@@ -28,7 +30,6 @@ export default function CourseDetails() {
         setCourseData(parsedData);
       }
     }, []);
-
 
 return (
 <main className="p-4 md:p-10 mx-auto max-w-7xl">
@@ -58,13 +59,25 @@ return (
     </div>
     <Card className="mt-8">
     {courseData && (
-        <div>
-          <h2>Watch Course</h2>
-          {hasWindow && <ReactPlayer controls={true} width={'100%'} height={500} url={courseData.url} />}
-        
-          <p>Title: {courseData.title}</p>
-          <p>Description: {courseData.description}</p>
+        <div className="text-center">
+        <h2 className="text-2xl font-semibold mb-4">Watch Course</h2>
+        {hasWindow && (
+          <div className="mx-auto max-w-full">
+            <ReactPlayer
+              controls={true}
+              className="w-full"
+              width={'100%'}
+              height={500}
+              url={courseData.url}
+            />
+          </div>
+        )}
+        <div className="mx-auto max-w-full text-left">
+          <p className="text-lg font-semibold">Title: {courseData.title}</p>
+          <p className="text-base text-gray-700">Description: {courseData.description}</p>
         </div>
+      </div>
+      
       )}
 </Card>
 </main>

@@ -9,6 +9,7 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 import getUser from '../fauna/getUser';
 import createUser from '../fauna/createUser';
 import Loading from './loading';
+import SocialShare from './elements/SocialShare';
 
 function CoursePlaceholder() {
   const [courses, setCourses] = useState([] as any);
@@ -85,10 +86,6 @@ if(loading){
     <Loading/>
   )
 }
-
-console.log('user', user)
-console.log('currentCourses', currentCourses)
-
 
   return (
       <main className="p-4 md:p-10 mx-auto max-w-7xl">
@@ -172,6 +169,12 @@ console.log('currentCourses', currentCourses)
           </button>
         ))}
       </div>
+      <Card  style={{marginTop: 20}}>
+      <SocialShare
+            url={'https://untitled-uni.vercel.app/syllabus'}
+            title={'Untitled Learnin, A learning platform to learn anything for free.'}
+          />
+      </Card>
     </main>
   );
 }
