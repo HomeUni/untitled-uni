@@ -4,7 +4,8 @@ import { FacebookShareButton, TwitterShareButton, LinkedinShareButton, WhatsappS
 const SocialShare = ({ url, title }) => {
   return (
     <div className="social-share">
-      <div className="flex space-x-8">
+       <div className="flex  justify-center ">
+        <div className="flex flex-wrap">
         <FacebookShareButton
             url={url}
             quote={title}
@@ -12,6 +13,8 @@ const SocialShare = ({ url, title }) => {
             backgroundColor: '#1877f2',
             color: 'white',
             padding: '8px 16px',
+            marginTop: 10,
+            marginLeft: 10,
             borderRadius: '4px',
             }}
         >
@@ -25,6 +28,8 @@ const SocialShare = ({ url, title }) => {
             backgroundColor: '#1da1f2',
             color: 'white',
             padding: '8px 16px',
+            marginTop: 10,
+            marginLeft: 10,
             borderRadius: '4px',
             }}
         >
@@ -38,6 +43,8 @@ const SocialShare = ({ url, title }) => {
             backgroundColor: '#2867b2',
             color: 'white',
             padding: '8px 16px',
+            marginTop: 10,
+            marginLeft: 10,
             borderRadius: '4px',
             }}
         >
@@ -51,6 +58,8 @@ const SocialShare = ({ url, title }) => {
             backgroundColor: '#25d366',
             color: 'white',
             padding: '8px 16px',
+            marginTop: 10,
+            marginLeft: 10,
             borderRadius: '4px',
             }}
         >
@@ -64,6 +73,8 @@ const SocialShare = ({ url, title }) => {
             backgroundColor: '#0073e6', // Change the background color as desired
             color: 'white', // Change the text color as desired
             padding: '8px 16px',
+            marginTop: 10,
+            marginLeft: 10,
             borderRadius: '4px',
         }}
         >
@@ -77,6 +88,8 @@ const SocialShare = ({ url, title }) => {
             backgroundColor: '#FF4500', // Change the background color as desired
             color: 'white', // Change the text color as desired
             padding: '8px 16px',
+            marginTop: 10,
+            marginLeft: 10,
             borderRadius: '4px',
         }}
         >
@@ -85,6 +98,7 @@ const SocialShare = ({ url, title }) => {
 
         </div>
 
+    </div>
     </div>
   );
 };

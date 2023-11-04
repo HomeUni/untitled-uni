@@ -108,6 +108,7 @@ if(loading){
             <Flex className="mt-6">
               <Text>{item.title}</Text>
               <Link
+              style={{backgroundColor: '#6D61F5',}}
                 className="bg-green-500 text-size-10 text-sm text-white px-2 py-1 rounded mr-1 text-right"
                 href={{
                   pathname: item.link,
@@ -139,6 +140,7 @@ if(loading){
                   {item?.category as string}
                 </Text>
                 <Link
+                style={{backgroundColor: '#6D61F5',}}
                   className="bg-blue-500 text-size-10 text-sm text-white px-2 py-1 rounded mr-1"
                   href={{
                     pathname: 'course-details',
@@ -156,11 +158,14 @@ if(loading){
       </Grid>
       )}
 
-      <div className="mt-4 flex justify-center">
+<div className="flex  justify-center ">
+            <div className="flex flex-wrap">
         {Array.from({ length: Math.ceil(courses.length / coursesPerPage) }, (_, i) => (
           <button
             key={i}
             onClick={() => paginate(i + 1)}
+            style={{marginTop: 50,
+              backgroundColor: i + 1 === currentPage ? '#B1ABF4' : '#6D61F5' }}
             className={`bg-blue-500 text-white px-4 py-2 rounded mx-1 ${
               i + 1 === currentPage ? 'bg-blue-700' : ''
             }`}
@@ -169,10 +174,12 @@ if(loading){
           </button>
         ))}
       </div>
+      </div>
+      
       <Card  style={{marginTop: 20}}>
       <SocialShare
             url={'https://untitled-uni.vercel.app/syllabus'}
-            title={'Untitled Learnin, A learning platform to learn anything for free.'}
+            title={'Hi, I just invited you to visit Untitled Learning, A learning platform to learn anything for free.'}
           />
       </Card>
     </main>

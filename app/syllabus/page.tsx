@@ -29,7 +29,7 @@ function CoursePlaceholder() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>(''); 
-  const coursesPerPage: number = 6; 
+  const coursesPerPage: number = 8; 
 
   useEffect(() => {
     async function fetchData() {
@@ -175,16 +175,16 @@ function CoursePlaceholder() {
                   <div className="p-4">
                     <h3 className="text-xl text-black font-semibold mb-2">{item.title}</h3>
                     
-                    <p className="text-blue-300 text-sm">
+                    <p style={{color: '#6D61F5'}} className="text-blue-300 text-sm">
                     {item?.category ?? 'Others'}
                     </p>
                     
-                    <p className="text-gray-500 text-sm" style={{wordWrap: 'break-word', marginBottom: 10}}>{item.description ?? ' Learn'}efdiyosukdvyuyvsdpvaoduhvchvljcouvhjvpsvoudhvuggv ushgvl</p>
+                    <p className="text-gray-500 text-sm" style={{wordWrap: 'break-word', marginBottom: 10}}>{item.description ?? ' Learn'}</p>
 
                     <div >
-                      <span style={{fontSize: 14}}>{countCourses(item.category)} + Total Courses</span>
+                      <span style={{fontSize: 14}}>{countCourses(item.category)} Total Courses</span>
                     <Link
-                      style={{float: 'right'}}
+                      style={{float: 'right', backgroundColor: '#6D61F5'}}
                       className="bg-blue-500 text-white px-2 py-1 text-right text-sm sm rounded"
                       href={{
                         pathname: 'courses',
@@ -202,16 +202,20 @@ function CoursePlaceholder() {
               ))}
           </Grid>
 
-          <div className="mt-4 flex justify-center">
+          <div className="flex  justify-center ">
+            <div className="flex flex-wrap">
               {Array.from({ length: Math.ceil(courses.length / coursesPerPage) }, (_, i) => (
                   <button
                       key={i}
                       onClick={() => paginate(i + 1)}
+                      style={{marginTop: 50,
+                        backgroundColor: i + 1 === currentPage ? '#B1ABF4' : '#6D61F5' }}
                       className={`bg-blue-500 text-white px-4 py-2 rounded mx-1 ${i + 1 === currentPage ? 'bg-blue-700' : ''}`}
                   >
                       {i + 1}
                   </button>
               ))}
+              </div>
           </div>
       </main></>
   );
