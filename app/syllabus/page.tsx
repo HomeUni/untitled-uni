@@ -112,7 +112,7 @@ function CoursePlaceholder() {
 
 
   const countCourses = (category:string) => {
-    const matchingCourses = lessons.filter((course) => course.category === category);
+    const matchingCourses = lessons.filter((course) => course.category[0] === category);
     return matchingCourses.length;
   }
 
@@ -153,7 +153,15 @@ function CoursePlaceholder() {
 
           <Grid numItemsSm={2} numItemsLg={4} style={{ marginTop: 20 }} className="gap-4">
               {currentCourses.map((item: any) => (
-                <><div
+                <>
+                 <Link
+                      href={{
+                        pathname: 'courses',
+                      }}
+                      onClick={() => {
+                          localStorage.setItem('categoryData', JSON.stringify(item));
+                      } }
+                    ><div
                   key={item.id}
                   className="bg-white shadow-md rounded-lg overflow-hidden sm:col-span-1 md:col-span-1 lg:col-span-1"
                 >
@@ -182,7 +190,7 @@ function CoursePlaceholder() {
                     <p className="text-gray-500 text-sm" style={{wordWrap: 'break-word', marginBottom: 10}}>{item.description ?? ' Learn'}</p>
 
                     <div >
-                      <span style={{fontSize: 14}}>{countCourses(item.category)} Total Courses</span>
+                      <span style={{fontSize: 14}}>{countCourses(item.title)} Total Courses</span>
                     <Link
                       style={{float: 'right', backgroundColor: '#6D61F5'}}
                       className="bg-blue-500 text-white px-2 py-1 text-right text-sm sm rounded"
@@ -198,6 +206,7 @@ function CoursePlaceholder() {
                     </div>
                   </div>
                 </div>
+                </Link>
                   </>
               ))}
           </Grid>

@@ -43,12 +43,12 @@ return (
       <li>
         <span className="text-gray-500">/</span>
       </li>
-      {/* <li>
-        <a href="#" className="text-gray-500 hover:underline">Courses</a>
+      <li>
+            <a href="/syllabus" className="text-gray-500 hover:underline">Syllabus</a>
       </li>
       <li>
         <span className="text-gray-500">/</span>
-      </li> */}
+      </li>
       <li>
         <a href="#" className="text-gray-900 font-medium">{courseData.title}</a>
       </li>

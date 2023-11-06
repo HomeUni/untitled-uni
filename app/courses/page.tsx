@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import  createUserCourse  from "../../fauna/createUserCourse"
 import "react-toastify/dist/ReactToastify.css";
 import EmptyState from '../elements/EmptyState';
+import Loading from '../loading';
 
 interface Course {
     id: string;
@@ -20,7 +21,7 @@ interface Course {
 
 function CoursePlaceholder() {
   const [courses, setCourses] = useState<Course[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
   const [user, setUser] = useState<any>({});
   const [category, setCategory] = useState<any>({});
@@ -49,7 +50,8 @@ function CoursePlaceholder() {
         return { ...course.data, id: course.ref.id } as Course;
       });
 
-      const matchingCourses = reformedCollection.filter((course:any) => course.category === parsedData.category);
+
+      const matchingCourses = reformedCollection.filter((course:any) => course.category[0] === parsedData.title);
 
       setCourses(matchingCourses);
       setLoading(false);
@@ -115,6 +117,15 @@ function CoursePlaceholder() {
 
   const isLoggedIn = () => !!userLoggedIn;
 
+
+  if(loading){
+    return (
+      <Loading/>
+    )
+  }
+
+  console.log('course', courses)
+
   return (
 
     <>
@@ -141,14 +152,14 @@ function CoursePlaceholder() {
           </ol>
         </nav>
       </div>
-          <div style={{ marginBottom: 20, marginTop: 20 }}>
-              <Title>All Courses</Title>
-              <Text>
+          <div style={{ marginBottom: 20, marginTop: 20 }} className='mt-4 text-right'>
+              <Text>All courses included in {category.title}</Text>
+              {/* <Text>
                   List of your current courses
-              </Text>
+              </Text> */}
           </div>
 
-          <div className="mt-4 text-right">
+          {/* <div className="mt-4 text-right">
               <label htmlFor="category">Filter by Category: </label>
               <select
                   id="category"
@@ -162,7 +173,7 @@ function CoursePlaceholder() {
                       </option>
                   ))}
               </select>
-          </div>
+          </div> */}
 
           {!loading && currentCourses.length === 0 ? (
         <EmptyState />
@@ -177,10 +188,11 @@ function CoursePlaceholder() {
                       </Text>
                       <br/>
                       <div>
-                          <Text><span className="bg-gray-500 text-white rounded-full px-2 py-1">{item?.category}</span></Text>
+                          <Text><span className="bg-gray-300 text-white rounded-full px-2 py-1">{item?.category}</span></Text>
                           <br />
                           <div className='text-right'>
                               <Link
+                              style={{float: 'right', backgroundColor: '#6D61F5'}}
                                   className="bg-blue-500 text-size-10 text-sm  text-white px-2 py-1 rounded mr-1"
                                   href={{
                                       pathname: 'course-details',
@@ -189,7 +201,7 @@ function CoursePlaceholder() {
                                       localStorage.setItem('courseData', JSON.stringify(item));
                                   } }
                               >
-                                  View
+                                  Take Lekture
                               </Link>
 
                               {isLoggedIn() ? (
@@ -199,7 +211,7 @@ function CoursePlaceholder() {
                                     handleSubmit(item);
                                   }}
                                 >
-                                  + my course
+                                  + My Course
                                 </button>
                               ) : (
                                 <><br/>
