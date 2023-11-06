@@ -8,7 +8,7 @@ import { Suspense } from 'react';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 export const metadata = {
-  title: 'Untitled Learning',
+  title: 'lekture',
   description:
     'A learning platform to learn anything for free.'
 };

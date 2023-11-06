@@ -33,11 +33,26 @@ export default function Navbar({ user }: { user: any }) {
             <div className="flex h-16 justify-between">
               <div className="flex">
                 <div className="flex flex-shrink-0 items-center">
-                <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M32.9805 16.0078C32.9805 7.17126 25.817 0.0078125 16.9805 0.0078125C8.14391 0.0078125 0.980469 7.17126 0.980469 16.0078C0.980469 24.8444 8.14391 32.0078 16.9805 32.0078C25.817 32.0078 32.9805 24.8444 32.9805 16.0078Z" fill="#F9FAFC"/>
-<path d="M24.2252 19.32V22H14.9652V8.14H18.0852V19.32H24.2252Z" fill="#6D61F5"/>
-<path d="M16.4497 25.28C15.4764 25.28 14.6364 25.1467 13.9297 24.88C13.223 24.6 12.6364 24.22 12.1697 23.74C11.7164 23.2467 11.3764 22.6667 11.1497 22C10.9364 21.32 10.8297 20.5733 10.8297 19.76V11.14H13.9497V19.5C13.9497 20.06 14.0097 20.54 14.1297 20.94C14.263 21.3267 14.4364 21.6467 14.6497 21.9C14.8764 22.14 15.143 22.3133 15.4497 22.42C15.7697 22.5267 16.1164 22.58 16.4897 22.58C17.2497 22.58 17.863 22.3467 18.3297 21.88C18.8097 21.4133 19.0497 20.62 19.0497 19.5V11.14H22.1697V19.76C22.1697 20.5733 22.0564 21.32 21.8297 22C21.603 22.68 21.2564 23.2667 20.7897 23.76C20.323 24.24 19.7297 24.6133 19.0097 24.88C18.2897 25.1467 17.4364 25.28 16.4497 25.28Z" fill="black"/>
-</svg>
+                <svg width="33" height="32" viewBox="0 0 240 255" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="120" cy="135" r="120" fill="#F9FAFC"/>
+                  <g filter="url(#filter0_d_1101_238)">
+                  <rect x="39" y="170" width="157" height="27" fill="black"/>
+                  <path d="M195.752 170.2V197H103.152V58.4H134.352V170.2H195.752Z" fill="#6D61F5"/>
+                  </g>
+                  <defs>
+                  <filter id="filter0_d_1101_238" x="35" y="58.3984" width="165" height="146.602" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                  <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                  <feOffset dy="4"/>
+                  <feGaussianBlur stdDeviation="2"/>
+                  <feComposite in2="hardAlpha" operator="out"/>
+                  <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1101_238"/>
+                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1101_238" result="shape"/>
+                  </filter>
+                  </defs>
+                  </svg>
+
 
 
                 </div>

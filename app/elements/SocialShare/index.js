@@ -1,5 +1,5 @@
 import React from 'react';
-import { FacebookShareButton, TwitterShareButton, LinkedinShareButton, WhatsappShareButton, RedditShareButton, EmailShareButton } from 'react-share';
+import { FacebookShareButton, TwitterShareButton, LinkedinShareButton, WhatsappShareButton, RedditShareButton, EmailShareButton, FacebookIcon, TwitterIcon, LinkedinIcon, WhatsappIcon, EmailIcon, RedditIcon } from 'react-share';
 
 const SocialShare = ({ url, title }) => {
   return (
@@ -9,91 +9,48 @@ const SocialShare = ({ url, title }) => {
         <FacebookShareButton
             url={url}
             quote={title}
-            style={{
-            backgroundColor: '#1877f2',
-            color: 'white',
-            padding: '8px 16px',
-            marginTop: 10,
-            marginLeft: 10,
-            borderRadius: '4px',
-            }}
         >
-            Share on Facebook
+            <FacebookIcon width={'40'} style={{marginLeft: 10}}/>
         </FacebookShareButton>
 
         <TwitterShareButton
             url={url}
             title={title}
-            style={{
-            backgroundColor: '#1da1f2',
-            color: 'white',
-            padding: '8px 16px',
-            marginTop: 10,
-            marginLeft: 10,
-            borderRadius: '4px',
-            }}
+            style={{marginLeft: 10}}
         >
-            Share on Twitter
+            <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.901 0H22.581L14.541 9.19L24 21.693H16.594L10.794 14.109L4.156 21.693H0.474L9.074 11.863L0 0.00100005H7.594L12.837 6.933L18.901 0ZM17.61 19.491H19.649L6.486 2.087H4.298L17.61 19.491Z" fill="black"/>
+            </svg>
+
+           {/* <TwitterIcon width={'40'} style={{marginLeft: 10}}/> */}
         </TwitterShareButton>
 
         <LinkedinShareButton
             url={url}
             title={title}
-            style={{
-            backgroundColor: '#2867b2',
-            color: 'white',
-            padding: '8px 16px',
-            marginTop: 10,
-            marginLeft: 10,
-            borderRadius: '4px',
-            }}
         >
-            Share on LinkedIn
+            <LinkedinIcon width={'40'} style={{marginLeft: 10}}/>
         </LinkedinShareButton>
 
         <WhatsappShareButton
             url={url}
             title={title}
-            style={{
-            backgroundColor: '#25d366',
-            color: 'white',
-            padding: '8px 16px',
-            marginTop: 10,
-            marginLeft: 10,
-            borderRadius: '4px',
-            }}
         >
-            Share on Whatsapp
+            <WhatsappIcon width={'40'} style={{marginLeft: 10}}/>
         </WhatsappShareButton>
 
         <EmailShareButton
         url={url}
         title={title}
-        style={{
-            backgroundColor: '#0073e6', // Change the background color as desired
-            color: 'white', // Change the text color as desired
-            padding: '8px 16px',
-            marginTop: 10,
-            marginLeft: 10,
-            borderRadius: '4px',
-        }}
         >
-        Share as Email
+            <EmailIcon width={'40'} style={{marginLeft: 10}}/>
         </EmailShareButton>
 
         <RedditShareButton
         url={url}
         title={title}
-        style={{
-            backgroundColor: '#FF4500', // Change the background color as desired
-            color: 'white', // Change the text color as desired
-            padding: '8px 16px',
-            marginTop: 10,
-            marginLeft: 10,
-            borderRadius: '4px',
-        }}
         >
-        Share on Reddit
+            <RedditIcon width={'40'} style={{marginLeft: 10}}/>
         </RedditShareButton>
 
         </div>
