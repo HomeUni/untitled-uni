@@ -187,7 +187,10 @@ function CoursePlaceholder() {
                     {item?.category ?? 'Others'}
                     </p>
                     
-                    <p className="text-gray-500 text-sm" style={{wordWrap: 'break-word', marginBottom: 10}}>{item.description ?? ' Learn'}</p>
+                    <p className="text-gray-500 text-sm" style={{wordWrap: 'break-word', marginBottom: 10}}> {item.description && item.description.length > 100
+                    ? item.description.substring(0, 100) + '...'
+                    : item.description || 'Learn'}
+                    </p>
 
                     <div >
                       <span style={{fontSize: 14}}>{countCourses(item.title)} Total Courses</span>
