@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Image from 'next/image';
 import Loading from '../loading';
 import getLessons from '../../fauna/getLessons';
+import getCoursesByCategory from '../../fauna/getCoursesByCategory';
 
 interface Course {
     id: string;
@@ -111,10 +112,15 @@ function CoursePlaceholder() {
   };
 
 
-  const countCourses = (category:string) => {
-    const matchingCourses = lessons.filter((course) => course.category[0] === category);
-    return matchingCourses.length;
-  }
+  // const countCourses = async(category:string) => {
+  //   const allCourses = await getCoursesByCategory(category);
+
+  //     const reformedCollection = allCourses.map((course: any) => {
+  //       return { ...course.data, id: course.ref.id } as Course;
+  //     });
+  //   // const matchingCourses = lessons.filter((course) => course.category[0] === category);
+  //   return reformedCollection.length;
+  // }
 
   if(loading){
     return (
@@ -193,7 +199,8 @@ function CoursePlaceholder() {
                     </p>
 
                     <div >
-                      <span style={{fontSize: 14}}>{countCourses(item.title)} Total Courses</span>
+                      {/* <span style={{fontSize: 14}}>{countCourses(item.title)} See Courses</span> */}
+                      <span style={{fontSize: 14}}> See Available Courses</span>
                     <Link
                       style={{float: 'right', backgroundColor: '#6D61F5'}}
                       className="bg-blue-500 text-white px-2 py-1 text-right text-sm sm rounded"

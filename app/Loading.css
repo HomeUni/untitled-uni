@@ -1,0 +1,30 @@
+.loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .centered-content {
+    text-align: center;
+  }
+  
+  .logo {
+    width: 300px; /* Adjust the width as needed */
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .blink {
+    animation: blink-animation 1s infinite;
+  }
+  
+  @keyframes blink-animation {
+    0%, 50%, 100% {
+      opacity: 1;
+    }
+    25%, 75% {
+      opacity: 0;
+    }
+  }
+  

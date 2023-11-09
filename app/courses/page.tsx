@@ -3,7 +3,7 @@
 import React, {useState, useEffect} from 'react'
 import { Card, Title, Text, Grid, Flex, Metric } from '@tremor/react';
 import Link from 'next/link';
-import getAllCourses from "../../fauna/getLessons";
+import getCoursesByCategory from "../../fauna/getCoursesByCategory";
 import { ToastContainer, toast } from "react-toastify";
 import  createUserCourse  from "../../fauna/createUserCourse"
 import "react-toastify/dist/ReactToastify.css";
@@ -44,16 +44,16 @@ function CoursePlaceholder() {
 
       setCategory(parsedData)
 
-      const allCourses = await getAllCourses();
+      const allCourses = await getCoursesByCategory(parsedData.title);
 
       const reformedCollection = allCourses.map((course: any) => {
         return { ...course.data, id: course.ref.id } as Course;
       });
 
-
-      const matchingCourses = reformedCollection.filter((course:any) => course.category[0] === parsedData.title);
-
-      setCourses(matchingCourses);
+      
+      // const matchingCourses = reformedCollection.filter((course:any) => course.category[0] === parsedData.title);
+      // console.log('matchingCourses', reformedCollection);
+      setCourses(reformedCollection);
       setLoading(false);
     }
     fetchData();
@@ -124,8 +124,6 @@ function CoursePlaceholder() {
     )
   }
 
-  console.log('course', courses)
-
   return (
 
     <>
@@ -152,28 +150,11 @@ function CoursePlaceholder() {
           </ol>
         </nav>
       </div>
-          <div style={{ marginBottom: 20, marginTop: 20 }} className='mt-4 text-right'>
-              <Text>All courses included in {category.title}</Text>
-              {/* <Text>
-                  List of your current courses
-              </Text> */}
+      <Text  className='mt-2 text-red-900 text-left'><code><small>NOTE: <span style={{ color: '#6D61F5'}}>Lekture</span> does not claim credit for these courses.</small></code></Text>
+          <div style={{ marginBottom: 20, marginTop: 20 }}>
+              <Text  className='mt-4 text-right'>All courses included in {category.title}</Text>
           </div>
 
-          {/* <div className="mt-4 text-right">
-              <label htmlFor="category">Filter by Category: </label>
-              <select
-                  id="category"
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  value={selectedCategory}
-              >
-                  <option value="">All Categories</option>
-                  {categories.map((category: any) => (
-                      <option key={category} value={category}>
-                          {category}
-                      </option>
-                  ))}
-              </select>
-          </div> */}
 
           {!loading && currentCourses.length === 0 ? (
         <EmptyState />
@@ -190,7 +171,7 @@ function CoursePlaceholder() {
                       <div>
                           <Text><span className="bg-gray-300 text-white rounded-full px-2 py-1">{item?.category}</span></Text>
                           <br />
-                          <div className='text-right'>
+                          <div >
                               <Link
                               style={{float: 'right', backgroundColor: '#6D61F5'}}
                                   className="bg-blue-500 text-size-10 text-sm  text-white px-2 py-1 rounded mr-1"
@@ -214,13 +195,13 @@ function CoursePlaceholder() {
                                   + My Course
                                 </button>
                               ) : (
-                                <><br/>
-                                  <small>Please sign in to add the course to your collection.</small><br/>
+                                <>
+                                  
                                   <a
                                     className="bg-black text-size-10 text-sm text-white px-2 py-1 rounded mr-1"
                                     href='/api/auth/login'
                                   >
-                                    Sign In
+                                   Sign in to add course<br/>
                                   </a>
                                 </>
                               )}

@@ -1,8 +1,9 @@
-import { query, Client } from 'faunadb'
+import { query, Client, Collection } from 'faunadb'
 import { FAUNA_SECRET } from './faunaKeys'
 
 const getAllUsers = async () => {
     const q = query
+    const { Documents, Paginate, Collections, Lambda, Get } = q
 
     const client = new Client({
         secret: FAUNA_SECRET,
@@ -11,10 +12,10 @@ const getAllUsers = async () => {
     })
 
     const lessonsQuery = client.query(
-        q.Map( 
-            q.Paginate(q.Match(q.Index('all_lessons'))),
-            q.Lambda(x => q.Get(x))
-        )
+        q.Map(
+            Paginate(Documents(Collection('lessons'))),
+            Lambda(x => Get(x)))
+
     )
     .then((ret) => { return ret.data })
     .catch((err) => {
