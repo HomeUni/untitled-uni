@@ -1,0 +1,21 @@
+.buy-me-coffee {
+    background-color: #ffde9e;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .buy-me-coffee a {
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .buy-me-coffee img {
+    width: 30px; /* Adjust the width of the coffee icon */
+    height: auto;
+    margin-right: 10px;
+  }

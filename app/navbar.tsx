@@ -217,5 +217,6 @@ export default function Navbar({ user }: { user: any }) {
         </>
       )}
     </Disclosure>
+    
   );
 }
