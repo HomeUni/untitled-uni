@@ -178,7 +178,7 @@ if(loading){
       
       <Card  style={{marginTop: 20}}>
       <SocialShare
-            url={'https://untitled-uni.vercel.app/syllabus'}
+            url={'https://lekture.vercel.app/syllabus'}
             title={'Hi, I just invited you to visit lekture, A learning platform to learn anything for free.'}
           />
       </Card>
