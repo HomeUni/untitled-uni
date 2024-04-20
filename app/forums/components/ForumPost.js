@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Comment from './Comment';
 
 import {updateLikesInBackend, updateCommentsInBackend} from '../../../fauna/updatePosts';
+import { HeartIcon } from '@heroicons/react/24/solid';
 
 
 const ForumPost = ({ post, user }) => {
@@ -90,8 +91,12 @@ const ForumPost = ({ post, user }) => {
             </div>
             )}
             <div className="flex items-center justify-between mt-4">
-                <button onClick={handleLike} className={`text-indigo-500 ${liked && 'opacity-50 cursor-not-allowed'}`}>
+                {/* <button onClick={handleLike} className={`text-indigo-500 ${liked && 'opacity-50 cursor-not-allowed'}`}>
                     {likes} Like{likes !== 1 && 's'}
+                </button> */}
+                <button onClick={handleLike} className={`flex text-red-500 ${liked && 'opacity-50 cursor-not-allowed'}`}>
+                    <HeartIcon className="w-6 h-6" />
+                    <span className="ml-1">{likes}</span>
                 </button>
                 <button onClick={toggleComments} className="text-indigo-500">{commentCount} Comment{commentCount !== 1 && 's'}</button>
 
@@ -113,7 +118,8 @@ const ForumPost = ({ post, user }) => {
                             </>
                         )}
                         {!user && (
-                            <p className="text-red-500">Please login to comment</p>
+                            <a className="bg-black text-size-10 text-sm text-white px-2 py-1 rounded mr-1" href="/api/auth/login">Login to comment</a>
+                            
                         )}
                         
                     </div><div className="mt-4">
