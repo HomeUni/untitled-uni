@@ -79,7 +79,7 @@ function PostPlaceholder() {
             {forums.map((item) => (
               <Link
                 key={item.name}
-                className=" px-2 py-1 text-sm rounded flex items-center justify-center bg-gray-200 mr-2 mb-2"
+                className={`px-2 py-1 text-sm rounded flex items-center justify-center mr-2 mb-2 ${selectedCategory === item.href ? 'bg-gray-200' : 'bg-gray-100'}`}
                 href={'#'}
                 onClick={() => setSelectedCategory(item.href)}
               >
