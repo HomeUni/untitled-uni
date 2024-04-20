@@ -127,7 +127,7 @@ if(loading){
       </div>
 
       {!loading && currentCourses.length === 0 ? (
-        <EmptyState />
+        <EmptyState message="No courses found" />
       ) : (
           <Grid numItemsSm={2} numItemsLg={3} style={{ marginTop: 20 }} className="gap-3">
           {currentCourses.map((item: any) => (

@@ -9,7 +9,8 @@ import Image from 'next/image';
 
 const navigation = [
   { name: 'Dashboard', href: '/' },
-  { name: 'Syllabus', href: '/syllabus' }
+  { name: 'Syllabus', href: '/syllabus' },
+  { name: 'Forums', href: '/forums' }
 ];
 
 function classNames(...classes: string[]) {
@@ -21,8 +22,9 @@ export default function Navbar({ user }: { user: any }) {
   const pathname = usePathname();
 
   const handleLogout = ()=>{
-    window.location = '/api/auth/logout' as any;
     localStorage.removeItem('user');
+    window.location = '/api/auth/logout' as any;
+    
   }
 
   return (
@@ -178,7 +180,7 @@ export default function Navbar({ user }: { user: any }) {
                     <div className="flex-shrink-0">
                       <Image
                         className="h-8 w-8 rounded-full"
-                        src={user.image}
+                        src={user.picture}
                         height={32}
                         width={32}
                         alt={`${user.name} avatar`}

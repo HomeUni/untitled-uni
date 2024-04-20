@@ -20,6 +20,7 @@ const FeedbackLink = () => {
     bottom: "20px",
     right: "20px",
     zIndex: "1000",
+    opacity: 0.8,
   };
 
   return (

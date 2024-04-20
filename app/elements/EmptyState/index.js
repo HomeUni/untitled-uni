@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React from 'react';
 
 
-const EmptyState = () => (
+const EmptyState = ({message}) => (
     <Card className='text-center mt-8'>
         <div className="flex items-center justify-center">
             <Image
@@ -17,7 +17,7 @@ const EmptyState = () => (
 
                 <div>
                 <Title style={{textAlign: 'center'}}>
-                    No Data !
+                    {message ? message : "No Data Found"}
                 </Title>
                 </div>
         </div>
