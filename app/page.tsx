@@ -10,7 +10,7 @@ import getUser from '../fauna/getUser';
 import createUser from '../fauna/createUser';
 import Loading from './loading';
 import SocialShare from './elements/SocialShare';
-
+import AppLayout from './appLayout';
 function CoursePlaceholder() {
   const [courses, setCourses] = useState([] as any);
   const [loading, setLoading] = useState(true);
@@ -88,6 +88,8 @@ if(loading){
 }
 
   return (
+    // <AppLayout>
+
       <main className="p-4 md:p-10 mx-auto max-w-7xl">
         <div  style={{marginBottom: 20}}>
           <Title>Dashboard</Title>
@@ -127,7 +129,7 @@ if(loading){
       </div>
 
       {!loading && currentCourses.length === 0 ? (
-        <EmptyState />
+        <EmptyState message="No courses found" />
       ) : (
           <Grid numItemsSm={2} numItemsLg={3} style={{ marginTop: 20 }} className="gap-3">
           {currentCourses.map((item: any) => (
@@ -178,11 +180,12 @@ if(loading){
       
       <Card  style={{marginTop: 20}}>
       <SocialShare
-            url={'https://untitled-uni.vercel.app/syllabus'}
+            url={'https://lekture.vercel.app/syllabus'}
             title={'Hi, I just invited you to visit lekture, A learning platform to learn anything for free.'}
           />
       </Card>
     </main>
+    // </AppLayout>
   );
 }
 

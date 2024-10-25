@@ -45,10 +45,14 @@ function CoursePlaceholder() {
       const reformedLessons = allLessons.map((course: any) => {
         return { ...course.data, id: course.ref.id } as Course;
       });
+      // sort by alphabetical order
+      reformedLessons.sort((a: { title: string; }, b: { title: any; }) => a.title.localeCompare(b.title));
       setLessons(reformedLessons);
       const reformedCollection = allCourses.map((course: any) => {
         return { ...course.data, id: course.ref.id } as Course;
       });
+      // sort by alphabetical order
+      reformedCollection.sort((a: { title: string; }, b: { title: any; }) => a.title.localeCompare(b.title));
       setCourses(reformedCollection);
       setLoading(false);
     }

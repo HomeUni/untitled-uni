@@ -7,9 +7,12 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
 
+import Search from './search';
+
 const navigation = [
   { name: 'Dashboard', href: '/' },
-  { name: 'Syllabus', href: '/syllabus' }
+  { name: 'Syllabus', href: '/syllabus' },
+  { name: 'Forums', href: '/forums' }
 ];
 
 function classNames(...classes: string[]) {
@@ -18,11 +21,13 @@ function classNames(...classes: string[]) {
 
 export default function Navbar({ user }: { user: any }) {
 
+
   const pathname = usePathname();
 
   const handleLogout = ()=>{
-    window.location = '/api/auth/logout' as any;
     localStorage.removeItem('user');
+    window.location = '/api/auth/logout' as any;
+    
   }
 
   return (
@@ -56,6 +61,7 @@ export default function Navbar({ user }: { user: any }) {
 
 
                 </div>
+                
                 <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                   {navigation.map((item) => (
                     <a
@@ -73,7 +79,13 @@ export default function Navbar({ user }: { user: any }) {
                     </a>
                   ))}
                 </div>
+                
+
               </div>
+
+            {/* <div className="h-full flex items-center">
+              <Search/>
+            </div> */}
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
                 <Menu as="div" className="relative ml-3">
                   <div>
@@ -178,7 +190,7 @@ export default function Navbar({ user }: { user: any }) {
                     <div className="flex-shrink-0">
                       <Image
                         className="h-8 w-8 rounded-full"
-                        src={user.image}
+                        src={user.picture}
                         height={32}
                         width={32}
                         alt={`${user.name} avatar`}
@@ -215,6 +227,7 @@ export default function Navbar({ user }: { user: any }) {
             </div>
           </Disclosure.Panel>
         </>
+
       )}
     </Disclosure>
     
