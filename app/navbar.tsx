@@ -7,6 +7,8 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
 
+import Search from './search';
+
 const navigation = [
   { name: 'Dashboard', href: '/' },
   { name: 'Syllabus', href: '/syllabus' },
@@ -18,6 +20,7 @@ function classNames(...classes: string[]) {
 }
 
 export default function Navbar({ user }: { user: any }) {
+
 
   const pathname = usePathname();
 
@@ -58,6 +61,7 @@ export default function Navbar({ user }: { user: any }) {
 
 
                 </div>
+                
                 <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                   {navigation.map((item) => (
                     <a
@@ -75,7 +79,13 @@ export default function Navbar({ user }: { user: any }) {
                     </a>
                   ))}
                 </div>
+                
+
               </div>
+
+            {/* <div className="h-full flex items-center">
+              <Search/>
+            </div> */}
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
                 <Menu as="div" className="relative ml-3">
                   <div>
@@ -217,6 +227,7 @@ export default function Navbar({ user }: { user: any }) {
             </div>
           </Disclosure.Panel>
         </>
+
       )}
     </Disclosure>
     

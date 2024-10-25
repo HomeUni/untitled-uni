@@ -10,7 +10,7 @@ import getUser from '../fauna/getUser';
 import createUser from '../fauna/createUser';
 import Loading from './loading';
 import SocialShare from './elements/SocialShare';
-
+import AppLayout from './appLayout';
 function CoursePlaceholder() {
   const [courses, setCourses] = useState([] as any);
   const [loading, setLoading] = useState(true);
@@ -88,6 +88,8 @@ if(loading){
 }
 
   return (
+    // <AppLayout>
+
       <main className="p-4 md:p-10 mx-auto max-w-7xl">
         <div  style={{marginBottom: 20}}>
           <Title>Dashboard</Title>
@@ -183,6 +185,7 @@ if(loading){
           />
       </Card>
     </main>
+    // </AppLayout>
   );
 }
 

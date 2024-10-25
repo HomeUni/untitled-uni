@@ -1,6 +1,8 @@
 import type { Config } from 'tailwindcss';
 
 export default {
+  darkMode: 'class', // Enable dark mode variants
+  
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -40,6 +42,38 @@ export default {
             strong: '#111827', // gray-900
             inverted: '#ffffff' // white
           }
+        },
+        // Define dark mode colors
+        dark: {
+          tremor: {
+            brand: {
+              faint: '#2e3440',
+              muted: '#4c566a',
+              subtle: '#5e81ac',
+              DEFAULT: '#81a1c1',
+              emphasis: '#88c0d0',
+              inverted: '#ffffff'
+            },
+            background: {
+              muted: '#2e3440',
+              subtle: '#3b4252',
+              DEFAULT: '#434c5e',
+              emphasis: '#4c566a'
+            },
+            border: {
+              DEFAULT: '#2e3440'
+            },
+            ring: {
+              DEFAULT: '#2e3440'
+            },
+            content: {
+              subtle: '#d8dee9',
+              DEFAULT: '#e5e9f0',
+              emphasis: '#eceff4',
+              strong: '#ffffff',
+              inverted: '#2e3440'
+            }
+          }
         }
       },
       boxShadow: {
@@ -48,7 +82,13 @@ export default {
         'tremor-card':
           '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
         'tremor-dropdown':
-          '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)'
+          '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+        // dark
+        'dark:tremor-input': '0 1px 2px 0 rgb(255 255 255 / 5%)',
+        'dark:tremor-card':
+          '0 1px 3px 0 rgb(255 255 255 / 5%), 0 1px 2px -1px rgb(255 255 255 / 5%)',
+        'dark:tremor-dropdown':
+          '0 4px 6px -1px rgb(255 255 255 / 5%), 0 2px 4px -2px rgb(255 255 255 / 5%)'
       },
       borderRadius: {
         'tremor-small': '0.375rem',
